@@ -1,6 +1,7 @@
 import * as dotenv from 'dotenv'; 
 dotenv.config();
 import express from 'express';
+import calculateExercises from './exerciseCalculator';
 import calculateBmi from './bmiCalculator';
 const app = express();
 
@@ -34,6 +35,29 @@ app.get('/bmi', (req, res)=>{
         result,
     });
 
+});
+
+app.post('/exercises', (req, res)=>{
+    // eslint-disable-next-line
+    const {daily_exercises, target} = req.body;
+
+    if(!daily_exercises || !target) res.json({
+        "error": "parameters missing"
+      });
+
+
+    try {
+        // eslint-disable-next-line
+        const result  = calculateExercises(daily_exercises, Number(target));
+        res.status(201).json(result).end();
+
+    } catch (e) {
+        res.json({
+            "error": "malformatted parameters"
+          }).end();
+    }
+    
+    
 });
 
 app.listen(PORT, () =>{

@@ -14,7 +14,7 @@ const calculateExercises = (daily: number[], target: number):Result =>{
 
     if(isNaN(target)) throw new Error('Target value is not a number'); 
 
-    if(process.argv.length < 4) throw new Error('Not enough arguments');
+    // if(process.argv.length < 4) throw new Error('Not enough arguments');
 
     const result = daily.reduce((a, b) => (a+b))/daily.length;
 
@@ -50,7 +50,7 @@ const calculateExercises = (daily: number[], target: number):Result =>{
 
 const len = process.argv.length;
 
-let array: number[] = [];
+// let array: number[] = [];
 
 let argvs: number[] = [];
 
@@ -61,9 +61,12 @@ for (let index = 3; index < len; index++) {
     
     const notNumbersArray = argvs.filter(arg=> (isNaN(arg)));
      if(notNumbersArray.length > 0) throw new Error ('Strings are not allowed as arguments');
-     array = argvs;
+    //  array = argvs;
     }
 
-const target = Number(process.argv[2]);
+// const target = Number(process.argv[2]);
 
-console.log(calculateExercises(array, target));
+// console.log(calculateExercises(array, target));
+
+export default calculateExercises;
+
