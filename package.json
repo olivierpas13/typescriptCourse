@@ -6,7 +6,7 @@
   "scripts": {
     "ts-node": "ts-node",
     "calculateBmi": "npm run ts-node bmiCalculator.ts",
-    "exerciseCalculator": "npm run ts-node exerciseCalculator.ts"
+    "calculateExercises": "npm run ts-node exerciseCalculator.ts"
   },
   "keywords": [],
   "author": "",

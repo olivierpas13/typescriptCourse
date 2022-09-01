@@ -9,6 +9,13 @@ interface Result {
 }
 
 const calculateExercises = (daily: number[], target: number):Result =>{
+    
+    target = Number(target)
+
+    if(isNaN(target)) throw new Error('Target value is not a number') 
+
+    if(process.argv.length < 4) throw new Error('Not enough arguments')
+
     const result = daily.reduce((a, b) => (a+b))/daily.length
 
     const trainingDays = daily.filter(day=> day !== 0).length
@@ -40,4 +47,22 @@ const calculateExercises = (daily: number[], target: number):Result =>{
 
 }
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2))
+const len = process.argv.length
+
+let array: number[] = [];
+
+let argvs: number[] = [];
+
+for (let index = 3; index < len; index++) {
+     argvs = argvs.concat(Number(process.argv[index]));
+
+    //  array = argvs.filter(arg=> !(isNaN(arg))) //one way
+    
+    const notNumbersArray = argvs.filter(arg=> (isNaN(arg)))
+     if(notNumbersArray.length > 0) throw new Error ('Strings are not allowed as arguments')
+     array = argvs
+    }
+
+const target = Number(process.argv[2])
+
+console.log(calculateExercises(array, target))
