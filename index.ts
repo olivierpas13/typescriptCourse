@@ -1,41 +1,41 @@
-import * as dotenv from 'dotenv' 
-dotenv.config()
+import * as dotenv from 'dotenv'; 
+dotenv.config();
 import express from 'express';
 import calculateBmi from './bmiCalculator';
-const app = express()
+const app = express();
 
-app.use(express.json())
+app.use(express.json());
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT;
 
 app.get('/hello', (_req, res)=>{
     
-    res.send('Hello Full Stack')
-})
+    res.send('Hello Full Stack');
+});
 
 app.get('/bmi', (req, res)=>{
 
-    const height = req.query.height
-    const weight = req.query.weight
+    const height = req.query.height;
+    const weight = req.query.weight;
 
-    if(!height || !weight) res.json({"error":"malformatted parameters"})
+    if(!height || !weight) res.json({"error":"malformatted parameters"});
 
     let result;
 
     try {
-        result = calculateBmi(Number(height),Number(weight))
+        result = calculateBmi(Number(height),Number(weight));
     } catch (error) {
-        res.json({"error":"malformatted parameters"})
+        res.json({"error":"malformatted parameters"});
     }
     
     res.json({
         weight,
         height,
-        result
-    })
+        result,
+    });
 
-})
+});
 
 app.listen(PORT, () =>{
-    console.log(`Server running on port ${PORT}`)
-})
+    console.log(`Server running on port ${PORT}`);
+});
