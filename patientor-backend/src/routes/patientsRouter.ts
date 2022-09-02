@@ -12,4 +12,16 @@ router.get('/', (_req, res)=>{
     }
 });
 
+router.post('/', (req, res)=>{
+    try {
+        /*eslint-disable-next-line */
+        const patientObj = req.body;
+        /*eslint-disable-next-line */
+        const patient = patientsService.addPatient(patientObj);
+        res.json(patient);
+    } catch (error) {
+        throw new Error;
+    }
+});
+
 export default router;

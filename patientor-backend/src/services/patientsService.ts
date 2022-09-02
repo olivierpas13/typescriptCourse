@@ -1,6 +1,8 @@
+import { v1 as uuid } from 'uuid';
+
 import patientsData from '../../data/patients.json';
 
-import { WithoutSSNPatient } from '../types';
+import { NewPatient, Patient, WithoutSSNPatient } from '../types';
 
 const patients: WithoutSSNPatient[] = patientsData as WithoutSSNPatient[];
 
@@ -16,6 +18,19 @@ const getPatients = (): WithoutSSNPatient[] =>{
     return result;
 };
 
+const addPatient = (object: NewPatient):Patient =>{
+    const newPatient = {
+        /*eslint-disable-next-line */
+        id: uuid(),
+        ...object
+    };
+
+    patients.concat(newPatient);
+
+    return newPatient;
+};
+
 export default {
-    getPatients
+    getPatients,
+    addPatient
 };
