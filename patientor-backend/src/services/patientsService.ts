@@ -3,6 +3,7 @@ import { v1 as uuid } from 'uuid';
 import patientsData from '../../data/patients.json';
 
 import { NewPatient, Patient, WithoutSSNPatient } from '../types';
+import { toNewDiaryEntry } from '../utils';
 
 const patients: WithoutSSNPatient[] = patientsData as WithoutSSNPatient[];
 
@@ -19,10 +20,11 @@ const getPatients = (): WithoutSSNPatient[] =>{
 };
 
 const addPatient = (object: NewPatient):Patient =>{
+    const patient = toNewDiaryEntry(object);
     const newPatient = {
         /*eslint-disable-next-line */
         id: uuid(),
-        ...object
+        ...patient
     };
 
     patients.concat(newPatient);

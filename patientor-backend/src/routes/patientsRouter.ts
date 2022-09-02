@@ -19,8 +19,13 @@ router.post('/', (req, res)=>{
         /*eslint-disable-next-line */
         const patient = patientsService.addPatient(patientObj);
         res.json(patient);
+        /*eslint-disable-next-line */
     } catch (error) {
-        throw new Error;
+        let errorMessage = 'Something went wrong.';
+        if (error instanceof Error) {
+          errorMessage += ' Error: ' + error.message;
+        }
+        res.status(400).send(errorMessage);  
     }
 });
 
