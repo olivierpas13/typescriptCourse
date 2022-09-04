@@ -36,6 +36,18 @@ const IndividualPatientPage = () =>{
                 </h1>
                 <p>SSN: {individualPatient.ssn}</p>
                 <p>Occupation: {individualPatient.occupation}</p>
+                {individualPatient.entries.length > 0
+                ? individualPatient.entries.map(entry=> {
+                    return(
+                    <div key={entry.id}>
+                        <h2>Entries</h2>
+                        <p>{entry.date} {entry.description}</p>
+                        <ul>
+                            {entry.diagnosisCodes?.map((diagnose, index)=> <li key={index} >{diagnose}</li>)}
+                        </ul>
+                    </div>
+                );}):<h2>No entries found</h2>}
+                                
             </div>
             :null
         }
