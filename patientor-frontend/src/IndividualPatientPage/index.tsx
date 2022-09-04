@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getIndividualPatient } from "../services/individualPatient";
 // import { Patient } from "../types";
-import { useStateValue } from "../state";
+import { addIndividualPatient, useStateValue } from "../state";
 // import FemaleIcon from '@mui/icons-material/Female';
 // import MaleIcon from '@mui/icons-material/Male';
 
@@ -16,10 +16,10 @@ const IndividualPatientPage = () =>{
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-return
         if(!(individualPatient?.id === id)){
             // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-argument
-            void getIndividualPatient(id)
+            getIndividualPatient(id)
             .then(({data })=> {
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                dispatch({ type: "ADD_INDIVIDUAL_PATIENT", payload: data });});
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-argument
+                dispatch(addIndividualPatient(data));}).catch(e=> console.error(e));
         }
     }, []);
     console.log(individualPatient);

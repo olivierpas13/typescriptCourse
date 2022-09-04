@@ -1,5 +1,6 @@
 import { State } from "./state";
 import { Patient } from "../types";
+// import { useStateValue } from "./state";
 
 export type Action =
   | {
@@ -40,10 +41,31 @@ export const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         individualPatient: action.payload
-          // ...state.patients,
       };
       
     default:
       return state;
   }
+};
+
+export const setPatientList = (list: Patient[] ):Action =>{
+
+  return {
+    type: "SET_PATIENT_LIST",
+    payload:list
+  };
+};
+
+export const addNewPatient = (patient: Patient): Action =>{
+  return{
+    type: "ADD_PATIENT",
+    payload: patient
+  };
+};
+
+export const addIndividualPatient = (patient: Patient): Action =>{
+  return{ 
+    type: "ADD_INDIVIDUAL_PATIENT",
+    payload: patient 
+  };
 };
