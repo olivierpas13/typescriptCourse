@@ -12,7 +12,6 @@ const IndividualPatientPage = () =>{
     const [ {individualPatient} , dispatch] = useStateValue();
 
     const { id } = useParams<{ id: string}>();
-    // const [patient, setPatient] = useState<Patient>();
     useEffect(()=>{
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-return
         if(!(individualPatient?.id === id)){
