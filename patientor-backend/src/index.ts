@@ -7,7 +7,6 @@ import patientsRouter from './routes/patientsRouter';
 const app = express();
 
 app.use(express.json());
-/*eslint-disable-next-line */
 app.use(cors());
 
 const PORT = process.env.PORT;

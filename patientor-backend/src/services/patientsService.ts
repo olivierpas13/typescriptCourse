@@ -6,6 +6,11 @@ import { NewPatient, Patient, WithoutSSNPatient } from '../types';
 import { toNewDiaryEntry } from '../utils';
 
 const patients: WithoutSSNPatient[] = patientsData as WithoutSSNPatient[];
+const allPatients: Patient[] = patientsData as Patient[];
+
+const getAllPatients = ():Patient[] =>{
+    return allPatients;
+};
 
 const getPatients = (): WithoutSSNPatient[] =>{
     const result = patients.map(({id, name, dateOfBirth, gender, occupation})=>({
@@ -13,7 +18,7 @@ const getPatients = (): WithoutSSNPatient[] =>{
         name,
         dateOfBirth,
         gender,
-        occupation
+        occupation,
     }));
     console.log(result);
     return result;
@@ -34,5 +39,6 @@ const addPatient = (object: NewPatient):Patient =>{
 
 export default {
     getPatients,
-    addPatient
+    addPatient,
+    getAllPatients
 };

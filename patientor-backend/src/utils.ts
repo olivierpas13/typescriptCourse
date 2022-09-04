@@ -1,6 +1,6 @@
-import { Gender, NewPatient } from "./types";
+import { Entry, Gender, NewPatient } from "./types";
 
-type Fields = {name:unknown, dateOfBirth:unknown, ssn:unknown, gender:unknown, occupation:unknown};
+type Fields = {name:unknown, dateOfBirth:unknown, ssn:unknown, gender:unknown, occupation:unknown, entries: Entry[]};
 
 const isString = (text: unknown): text is string => {
     return typeof text === 'string' || text instanceof String;
@@ -54,13 +54,15 @@ const parseGender = (gender: unknown): Gender =>{
     return gender;
 };
 
-export const toNewDiaryEntry = ({name, dateOfBirth, ssn, gender, occupation}: Fields): NewPatient => {
+export const toNewDiaryEntry = ({name, dateOfBirth, ssn, gender, occupation, entries}: Fields): NewPatient => {
     const newEntry: NewPatient = {
-        name: parseName(name),
+      name: parseName(name),
       dateOfBirth: parseDate(dateOfBirth),
       ssn: parseSSN(ssn),
       gender: parseGender(gender),
-      occupation: parseOccupation(occupation)
+      occupation: parseOccupation(occupation),
+      /* eslint-disable */
+      entries: entries
     };
     return newEntry;
   };

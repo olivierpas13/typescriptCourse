@@ -3,9 +3,21 @@ import patientsService from '../services/patientsService';
 
 const router = express.Router();
 
+router.get('/:id',(req, res)=>{
+    try {
+        const {params} = req;
+        const patients = patientsService.getAllPatients();
+        const patient = patients.find(patient=> patient.id === params.id);
+
+        res.json(patient).end();
+
+    } catch (error) {
+        throw new Error;
+    }
+});
+
 router.get('/', (_req, res)=>{
     try {
-        
         res.json(patientsService.getPatients()).end();
     } catch (error) {
         throw new Error;
@@ -28,5 +40,6 @@ router.post('/', (req, res)=>{
         res.status(400).send(errorMessage);  
     }
 });
+
 
 export default router;
