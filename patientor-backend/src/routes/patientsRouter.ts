@@ -8,6 +8,7 @@ router.get('/:id',(req, res)=>{
         const {params} = req;
         const patients = patientsService.getAllPatients();
         const patient = patients.find(patient=> patient.id === params.id);
+        // console.log(JSON.parse(patient));
 
         res.json(patient).end();
 

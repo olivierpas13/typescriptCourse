@@ -1,12 +1,13 @@
 import { v1 as uuid } from 'uuid';
 
-import patientsData from '../../data/patients.json';
+// import patientsData from '../../data/patients.json';
+import patientsFromDatabase from '../../data/patients';
 
 import { NewPatient, Patient, WithoutSSNPatient } from '../types';
 import { toNewDiaryEntry } from '../utils';
 
-const patients: WithoutSSNPatient[] = patientsData as WithoutSSNPatient[];
-const allPatients: Patient[] = patientsData as Patient[];
+const patients: WithoutSSNPatient[] = patientsFromDatabase as WithoutSSNPatient[];
+const allPatients: Patient[] = patientsFromDatabase;
 
 const getAllPatients = ():Patient[] =>{
     return allPatients;
