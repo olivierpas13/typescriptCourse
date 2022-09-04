@@ -1,7 +1,7 @@
-import { Course } from "../types.d"
+import { CoursePart } from "../types.d"
 
 interface props{
-    courseParts: Course[]
+    courseParts: CoursePart[]
 }
 
 const Total = ({courseParts}:props) =>{

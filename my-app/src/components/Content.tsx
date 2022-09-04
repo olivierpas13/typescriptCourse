@@ -1,20 +1,17 @@
-import {Course} from '../types.d'
+import {CoursePart} from '../types.d'
+import Part from '../components/Part'
+import React from 'react'
 
 interface props{
-    courseParts: Course[]
+    courseParts: CoursePart[]
 }
 
-const Content = ({courseParts}: props): JSX.Element =>{
+const Content:React.FC<props> = ({courseParts}) =>{
     return(
         <div>
-        {courseParts.map((course, index: number) =>{
-            return(
-            // eslint-disable-next-line react/no-unknown-property
-            <p key={index} >
-                {course.name} {course.exerciseCount}
-            </p>
-            )
-        })}
+        {courseParts.map((course) =>(
+                <Part key={course.name} part={course} />
+        ))}
         </div>
     )
 }
