@@ -6,3 +6,8 @@ export const getIndividualPatient = async (id: string | undefined) =>{
     const patient = await axios.get(`${apiBaseUrl}/patients/${id}`);
     return patient;
 };
+
+export const getAllDiagnosis = async () =>{
+    const patients = await axios.get(`${apiBaseUrl}/diagnoses/`);
+    return patients;
+};
