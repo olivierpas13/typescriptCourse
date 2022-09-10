@@ -3,7 +3,7 @@ import { v1 as uuid } from 'uuid';
 // import patientsData from '../../data/patients.json';
 import patientsFromDatabase from '../../data/patients';
 
-import { NewPatient, Patient, WithoutSSNPatient } from '../types';
+import { Entry, HealthCheckEntry, HospitalEntry, NewPatient, OccupationalHealthcareEntry, Patient, WithoutSSNPatient } from '../types';
 import { toNewDiaryEntry } from '../utils';
 
 const patients: WithoutSSNPatient[] = patientsFromDatabase as WithoutSSNPatient[];
@@ -38,8 +38,53 @@ const addPatient = (object: NewPatient):Patient =>{
     return newPatient;
 };
 
+const isValidHealthCheckEntry = (entry: HealthCheckEntry) =>{
+    const {healthCheckRating} = entry
+    if(!healthCheckRating){return false}
+    return true;
+}
+
+const isValidHospitalEntry = (entry: HospitalEntry) =>{
+    const {discharge} = entry
+    const {date, criteria} = discharge
+
+    if(!discharge || !date || !criteria){return false}
+    return true
+}
+
+const isValidOccupationalHealthcareEntry = (entry: OccupationalHealthcareEntry) =>{
+
+    const {employerName} = entry
+    if(!employerName){return false}
+    return true
+}
+
+const isEntry = (entry: Entry) =>{
+    const {date, type, specialist, description, id} = entry
+    if(!date || !type || !specialist || !description || id){return false}
+    if(type === 'HealthCheck'){
+        return isValidHealthCheckEntry(entry) ;
+    }
+    if(type === 'Hospital'){
+        return isValidHospitalEntry(entry);
+    }
+    if(type === 'OccupationalHealthcare'){
+        return isValidOccupationalHealthcareEntry(entry);
+    }
+    return false
+}
+
+// const addEntry = (object: Entry, id : string ) =>{
+//     const patient = allPatients.find(patient=> patient.id === id)
+//     patient.entries = {
+//         ...patient?.entries,
+//         object
+//     }
+// }
+
 export default {
     getPatients,
     addPatient,
-    getAllPatients
+    getAllPatients,
+    isEntry
 };

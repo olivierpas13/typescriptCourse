@@ -1,3 +1,4 @@
+import { randomUUID } from 'crypto';
 import express from 'express';
 import patientsService from '../services/patientsService';
 
@@ -41,6 +42,30 @@ router.post('/', (req, res)=>{
         res.status(400).send(errorMessage);  
     }
 });
+
+router.post('/:id/entries', (req, res)=>{
+    try {
+        if(patientsService.isEntry(req.body) === false){
+            return res.status(400).json('Invalid input')
+        }
+        const {params: {id}} = req;
+        const patients = patientsService.getAllPatients();
+
+
+        let patient = patients.find(patient=> patient.id === id);
+        
+        const entry = {
+            id: randomUUID(),
+            ...req.body,
+
+        }
+
+        return res.json(patient?.entries.concat(entry))
+    } catch (error) {
+        console.error(error)
+        return error
+    }
+})
 
 
 export default router;
