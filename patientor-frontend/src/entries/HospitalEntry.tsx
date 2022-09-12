@@ -26,7 +26,7 @@ const HospitalEntry = ({entry}: Props) =>{
         <CardContent>
         <p>{entry.date}</p><MonitorHeartIcon/>
         <p>{entry.description}</p>
-        <ul>{diagnosesList?.map(diag=> <li key={diag?.code} >{diag?.code} {diag?.name}</li>)}</ul>
+        <ul>{diagnosesList?.map((diag, index)=> <li key={index} >{diag?.code} {diag?.name}</li>)}</ul>
         <p>Diagnose by {entry.specialist}</p>
         </CardContent>
      </Card>   

@@ -21,7 +21,6 @@ const getPatients = (): WithoutSSNPatient[] =>{
         gender,
         occupation,
     }));
-    console.log(result);
     return result;
 };
 
@@ -39,29 +38,29 @@ const addPatient = (object: NewPatient):Patient =>{
 };
 
 const isValidHealthCheckEntry = (entry: HealthCheckEntry) =>{
-    const {healthCheckRating} = entry
-    if(!healthCheckRating){return false}
-    return true;
-}
+    const {healthCheckRating} = entry;
+    if(healthCheckRating > -1 && healthCheckRating < 4){return true;}
+    return false;
+};
 
 const isValidHospitalEntry = (entry: HospitalEntry) =>{
-    const {discharge} = entry
-    const {date, criteria} = discharge
+    const {discharge} = entry;
+    const {date, criteria} = discharge;
 
-    if(!discharge || !date || !criteria){return false}
-    return true
-}
+    if(!discharge || !date || !criteria){return false;}
+    return true;
+};
 
 const isValidOccupationalHealthcareEntry = (entry: OccupationalHealthcareEntry) =>{
 
-    const {employerName} = entry
-    if(!employerName){return false}
-    return true
-}
+    const {employerName} = entry;
+    if(!employerName){return false;}
+    return true;
+};
 
 const isEntry = (entry: Entry) =>{
-    const {date, type, specialist, description, id} = entry
-    if(!date || !type || !specialist || !description || id){return false}
+    const {date, type, specialist, description, id} = entry;
+    if(!date || !type || !specialist || !description || id){return false;}
     if(type === 'HealthCheck'){
         return isValidHealthCheckEntry(entry) ;
     }
@@ -71,16 +70,8 @@ const isEntry = (entry: Entry) =>{
     if(type === 'OccupationalHealthcare'){
         return isValidOccupationalHealthcareEntry(entry);
     }
-    return false
-}
-
-// const addEntry = (object: Entry, id : string ) =>{
-//     const patient = allPatients.find(patient=> patient.id === id)
-//     patient.entries = {
-//         ...patient?.entries,
-//         object
-//     }
-// }
+    return false;
+};
 
 export default {
     getPatients,

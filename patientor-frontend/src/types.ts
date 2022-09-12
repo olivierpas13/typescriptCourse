@@ -1,4 +1,4 @@
-interface BaseEntry {
+export interface BaseEntry {
   id: string;
   description: string;
   date: string;
@@ -18,7 +18,7 @@ type: "HealthCheck";
 healthCheckRating: HealthCheckRating;
 }
 
-interface HospitalEntry extends BaseEntry{
+export interface HospitalEntry extends BaseEntry{
   type: "Hospital";
   discharge:{
       date: string,
@@ -63,3 +63,9 @@ export type Entry =
   | HospitalEntry
   | OccupationalHealthcareEntry
   | HealthCheckEntry;
+
+
+  export type NewEntry =
+  | Omit<HospitalEntry, "id">
+  | Omit<OccupationalHealthcareEntry, "id">
+  | Omit<HealthCheckEntry, "id">;
